@@ -35,8 +35,10 @@
       progress.set(count / 10);
     }
   }
-  let scoreCountdown = setInterval(countdownTimer, 100);
+  // let scoreCountdown = setInterval(countdownTimer, 100);
+  let scoreCountdown;
   let failed = false;
+
 
   onMount(() => {
     setInterval(async () => {
@@ -51,10 +53,7 @@
         list[currentLoaded + 1].image =
           parsedVal?.sprites?.other["official-artwork"].front_default;
         currentLoaded += 1;
-        console.log(
-          "🚀 ~ file: App.svelte ~ line 34 ~ setInterval ~ list",
-          list
-        );
+        
         // setLStorage('list', JSON.stringify(list));
         // setLStorage('currentLoaded', currentLoaded);
       }
@@ -68,6 +67,10 @@
     // }, 100);
   });
 
+  function onImageLoaded() {
+    scoreCountdown = setInterval(countdownTimer, 100);
+  }
+
   function onCorrectChoice() {
     isCorrect = true;
     score = score + 10 * (Math.ceil(count) ? Math.ceil(count) : 1);
@@ -77,7 +80,7 @@
       spread: 70,
       origin: { y: 0.6 },
     });
-    scoreCountdown = setInterval(countdownTimer, 100);
+    // scoreCountdown = setInterval(countdownTimer, 100);
   }
 
   function onWrongChoice() {
@@ -99,7 +102,7 @@
   {#if !failed}
     <div>
       <h1>Score: {score}</h1>
-      <CenterView {list} {currentViewed} {isCorrect} />
+      <CenterView {list} {currentViewed} {isCorrect} {onImageLoaded}/>
 
       <Options
         optionsList={list[currentViewed].options}
@@ -162,6 +165,7 @@
               isCorrect = false;
               clearInterval(scoreCountdown);
             }}
+            title="NEXT"
           />
         </div>
       {/if}
@@ -169,6 +173,7 @@
   {:else}
     <div in:fade out:fade>
       <h1>You'll get 'em next time...</h1>
+      <h2>Score: {score}</h2>
       <div class="fail-img">
         <div
           class="try-item"
