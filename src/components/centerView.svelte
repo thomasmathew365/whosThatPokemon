@@ -23,7 +23,6 @@
 
 <style>
   .image-container {
-    /* background-color: black; */
     min-height: 40vh;
   }
   .pokemon-image {

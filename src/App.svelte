@@ -13,6 +13,7 @@
 
   console.log(`'beforeinstallprompt' event was fired.`);
   }
+
 </script>
 
 
