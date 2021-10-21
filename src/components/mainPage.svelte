@@ -234,7 +234,7 @@
     }
   }
   .fail-img {
-    background-image: url("../image/pikachu-fail.png");
+    background-image: url("../images/pikachu-fail.png");
     height: 50vh;
     background-position: center;
     background-size: contain;
