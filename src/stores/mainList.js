@@ -6,6 +6,7 @@ const cacheMax = 5;
 
 
 
+
 let data = [];
 
 function initialList() {

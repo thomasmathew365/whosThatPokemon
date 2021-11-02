@@ -62,3 +62,11 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+
+#generation-range {
+	background-color: #3b4cca;
+
+}
+#generation-range > .rangeBar {
+	background-color: #c04c4b;
+} 

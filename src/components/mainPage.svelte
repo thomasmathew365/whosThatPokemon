@@ -8,6 +8,7 @@
   } from "../utils/common";
   import Options from "./options.svelte";
   import CenterView from "./centerView.svelte";
+  import GenerationSlider from "./generationSelection.svelte";
   import Next from "./nextButton.svelte";
   import { fly, fade } from "svelte/transition";
   import confetti from "canvas-confetti";
@@ -15,6 +16,7 @@
   import { cubicOut } from "svelte/easing";
   import ProgressBar from "./progressBar.svelte";
   import Image from "svelte-image";
+  import { generationByID } from "../utils/constants";
 
   const progress = tweened(0, {
     duration: 400,
@@ -38,6 +40,7 @@
   let scoreCountdown;
   let failed = false;
   let showCountdown = false;
+  let sliderValue = [0, 1];
 
   onMount(() => {
     setInterval(async () => {
@@ -86,12 +89,23 @@
 </script>
 
 <div>
+  {console.log(
+    generationByID[sliderValue[0]].min,
+    generationByID[sliderValue[1]].max
+  )}
   <div class="bg" />
   <div class="bg bg2" />
   <div class="bg bg3" />
   {#if !failed}
     <div>
       <h1>Score: {score}</h1>
+      <GenerationSlider
+        isVisible={true}
+        {sliderValue}
+        onSliderChange={(e) => {
+          sliderValue = e.detail.values;
+        }}
+      />
       <CenterView {list} {currentViewed} {isCorrect} {onImageLoaded} />
 
       <Options
@@ -102,7 +116,7 @@
       {#if isCorrect}
         <div
           in:fly={{ x: -200, duration: 1000, delay: 500 }}
-          out:fly={{ x: 200, duration: 500}}
+          out:fly={{ x: 200, duration: 500 }}
           class="next-button-container"
         >
           <Next
@@ -136,7 +150,6 @@
           }}
         >
           Try Again?
-          
         </div>
         <Image src="../images/pikachu-fail.png" />
       </div>
