@@ -89,23 +89,23 @@
 </script>
 
 <div>
-  {console.log(
+  <!-- {console.log(
     generationByID[sliderValue[0]].min,
     generationByID[sliderValue[1]].max
-  )}
+  )} -->
   <div class="bg" />
   <div class="bg bg2" />
   <div class="bg bg3" />
   {#if !failed}
     <div>
       <h1>Score: {score}</h1>
-      <GenerationSlider
+      <!-- <GenerationSlider
         isVisible={true}
         {sliderValue}
         onSliderChange={(e) => {
           sliderValue = e.detail.values;
         }}
-      />
+      /> -->
       <CenterView {list} {currentViewed} {isCorrect} {onImageLoaded} />
 
       <Options
